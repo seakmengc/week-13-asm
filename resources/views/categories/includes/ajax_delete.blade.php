@@ -1,0 +1,1 @@
+ <button type="submit" class="btn btn-outline-danger ajax-delete" data-url="{{ route('categories.ajax_delete', $category) }}" data-id="category-{{ $category->id }}">Ajax Delete</button>
