@@ -6,7 +6,7 @@ return [
      */
     'model_basepath' => 'app/Models',
 
-    'controller_basepath' => 'app/Http/Controllers',
+    'controller_basepath' => 'app/Http/Controllers/Api/v1',
 
     'resource_basepath' => 'app/Http/Resources',
 
