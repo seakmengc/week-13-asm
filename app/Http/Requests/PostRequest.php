@@ -16,7 +16,8 @@ class PostRequest extends FormRequest
     {
         return [
             'category_id' => ['bail', 'required', 'integer', 'exists:categories,id'],
-            'name' => ['bail', 'required', 'string', 'min:4', 'max:255'],
+            'title' => ['bail', 'required', 'string', 'min:4', 'max:255'],
+            'content' => ['bail', 'required', 'string', 'max:255'],
         ];
     }
 }

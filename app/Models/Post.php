@@ -21,9 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *     @SWG\Property(
- *          property="category_id",
- *          description="category_id",
- *          type="string"
+ *          property="category",
+ *          description="category",
+ *          type="category",
+ *          ref="#/definitions/Category"
  *      ),
  *     @SWG\Property(
  *          property="author",
@@ -56,7 +57,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Post extends Model
 {
-    protected $fillable = ['category_id', 'name'];
+    protected $fillable = ['category_id', 'title', 'content'];
+
+    protected $with = ['category', 'author'];
 
     public function category()
     {

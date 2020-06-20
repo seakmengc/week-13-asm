@@ -25,7 +25,7 @@ class CategoryApiController extends Controller
      *          description="Filter by category name",
      *          type="string",
      *          required=false,
-     *          in="formData"
+     *          in="query"
      *     ),
      *
      *     @SWG\Response(

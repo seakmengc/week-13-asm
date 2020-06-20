@@ -21,7 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group([
     'namespace' => 'Api',
-    // 'middleware' => 'auth:api'
 ], function () {
     Route::apiResource('categories', 'CategoryApiController');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::apiResource('posts', 'PostApiController');
+    });
 });

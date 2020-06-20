@@ -19,7 +19,7 @@
                 "parameters": [
                     {
                         "name": "name",
-                        "in": "formData",
+                        "in": "query",
                         "description": "Filter by category name",
                         "required": false,
                         "type": "string"
@@ -212,6 +212,62 @@
             }
         },
         "/posts": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get post list",
+                "description": "Get post list",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Provide in header request: Authorization: Bearer ACCESS_TOKEN",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Filter by post title",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post list",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "properties": {
+                                        "post": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Post"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Post"
@@ -241,20 +297,13 @@
                         "in": "formData",
                         "description": "category_id",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "author",
-                        "in": "formData",
-                        "description": "author",
-                        "required": false,
-                        "type": "string"
+                        "type": "integer"
                     },
                     {
                         "name": "content",
                         "in": "formData",
                         "description": "content",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -266,16 +315,9 @@
                                 "success": {
                                     "type": "boolean"
                                 },
-                                "data": {
-                                    "properties": {
-                                        "post": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/Post"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
+                                "post": {
+                                    "type": "object",
+                                    "$ref": "#/definitions/Post"
                                 },
                                 "message": {
                                     "type": "string"
@@ -286,6 +328,129 @@
                     },
                     "400": {
                         "description": "Missing required field"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/posts/{id}": {
+            "put": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Update post",
+                "description": "Update post",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Provide in header request: Authorization: Bearer ACCESS_TOKEN",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "post id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "description": "title",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "formData",
+                        "description": "category_id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "description": "content",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post was updated successfully.",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "post",
+                                    "$ref": "#/definitions/Post"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing required field"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Delete post",
+                "description": "Delete post",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Provide in header request: Authorization: Bearer ACCESS_TOKEN",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "post id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post was deleted successfully.",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "object"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
                     },
                     "500": {
                         "description": "Server Error"
@@ -338,9 +503,10 @@
                     "description": "title",
                     "type": "string"
                 },
-                "category_id": {
-                    "description": "category_id",
-                    "type": "string"
+                "category": {
+                    "description": "category",
+                    "type": "category",
+                    "$ref": "#/definitions/Category"
                 },
                 "author": {
                     "description": "author",
