@@ -157,6 +157,66 @@ class CategoryApiController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      *
+     * @SWG\Get(
+     *     path="/categories/{id}",
+     *     summary="Show category",
+     *     tags={"Category"},
+     *     description="Show category",
+     *     produces={"application/json"},
+     *
+     *     @SWG\Parameter(
+     *          name="id",
+     *          description="id",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *     ),
+     *
+     *     @SWG\Response(
+     *      response=200,
+     *      description="Category was shown successfully.",
+     *
+     *      @SWG\Schema(
+     *        type="object",
+     *        @SWG\Property(
+     *           property="success",
+     *           type="boolean"
+     *        ),
+     *        @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          @SWG\Property(
+     *            property="category",
+     *            type="array",
+     *            @SWG\Items(ref="#/definitions/Category")
+     *          ),
+     *        ),
+     *        @SWG\Property(
+     *          property="message",
+     *          type="string"
+     *        )
+     *     )
+     *   ),
+     *
+     *     @SWG\Response(
+     *          response=500,
+     *          description="Server Error"
+     *     )
+     * )
+     */
+    public function show(Category $category)
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'Category was shown successfully.',
+            'data' => $category
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
      * @SWG\Put(
      *     path="/categories/{id}",
      *     summary="Update category",
