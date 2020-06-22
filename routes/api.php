@@ -25,6 +25,6 @@ Route::group([
     Route::apiResource('categories', 'CategoryApiController');
 
     Route::middleware('auth:api')->group(function () {
-        Route::apiResource('posts', 'PostApiController');
     });
+    Route::apiResource('posts', 'PostApiController');
 });

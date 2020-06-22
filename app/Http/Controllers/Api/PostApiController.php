@@ -234,7 +234,7 @@ class PostApiController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Category was shown successfully.',
-            'data' => $post
+            'data' => new PostResource($post)
         ]);
     }
 
