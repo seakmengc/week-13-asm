@@ -172,6 +172,73 @@ class PostApiController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @SWG\Get(
+     *     path="/posts/{id}",
+     *     summary="Show post",
+     *     tags={"Post"},
+     *     description="Show post",
+     *     produces={"application/json"},
+     *
+     *     @SWG\Parameter(
+     *          name="Authorization",
+     *          description="Provide in header request: Authorization: Bearer ACCESS_TOKEN",
+     *          type="string",
+     *          required=true,
+     *          in="header"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="id",
+     *          description="id",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *     ),
+     *
+     *     @SWG\Response(
+     *      response=200,
+     *      description="Post was shown successfully.",
+     *
+     *      @SWG\Schema(
+     *        type="object",
+     *        @SWG\Property(
+     *           property="success",
+     *           type="boolean"
+     *        ),
+     *        @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          @SWG\Property(
+     *            property="post",
+     *            type="array",
+     *            @SWG\Items(ref="#/definitions/Post")
+     *          ),
+     *        ),
+     *        @SWG\Property(
+     *          property="message",
+     *          type="string"
+     *        )
+     *     )
+     *   ),
+     *
+     *     @SWG\Response(
+     *          response=500,
+     *          description="Server Error"
+     *     )
+     * )
+     */
+    public function show(Post $post)
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'Category was shown successfully.',
+            'data' => $post
+        ]);
+    }
+
+    /**
      * @param PostRequest $request
      * @return \Illuminate\Http\JsonResponse
      *
