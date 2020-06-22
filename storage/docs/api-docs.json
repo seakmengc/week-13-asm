@@ -601,8 +601,8 @@
             "properties": {
                 "id": {
                     "description": "id",
-                    "type": "integer",
-                    "format": "int32"
+                    "type": "bigInt",
+                    "format": "int64"
                 },
                 "title": {
                     "description": "title",

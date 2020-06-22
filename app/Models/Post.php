@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  *          property="id",
  *          description="id",
  *          type="integer",
- *          format="int32"
+ *          format="int64"
  *      ),
  *      @SWG\Property(
  *          property="title",
